@@ -28,4 +28,6 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 		var 'GRE Score'n 'TOEFL Score'n 'University Rating'n SOP LOR CGPA Research  
 			'Chance of Admit'n; 
 	run; 
+<a href="https://github.com/Ak1714/SAS_models/tree/master/Decision_Support/Correlation_matrix-results.html)">Click for results</a>
+	[Click for results](https://github.com/Ak1714/SAS_models/tree/master/Decision_Support/Correlation_matrix-results.html)
 
