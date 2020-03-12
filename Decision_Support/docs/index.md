@@ -1,6 +1,5 @@
-# Welcome to MkDocs
+# Decision Suppport Model
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
 ## Commands -try editing this
 
@@ -15,8 +14,35 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
     mkdocs.yml    # The configuration file.
     docs/
         index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
-		
+
+## Data source
+
+https://www.kaggle.com/mohansacharya/graduate-admissions
+
+## Summary
+
+ This project analyzes the graduate admission process in American universities from international students’ perspectives. The goal was to build a decision support model that provides undergraduate international applicants with important information as well as the ability to make an informed decision during the application, with high confidence of being accepted. The analysis considers factors such as standardized test scores and GPA as well as university reputation.
+
+## Data Analysis
+ Step 1:
+ 
+ We start by first studying the relationships between each parameter using a pairwise correlation matrix
+ As per the correlation matrix below it is clear that there is high correlation between GRE score, TOEFL score and CGPA with Chance of admit. 
+ It also shows that GRE score and TOEFL score have a high correlation (R=0.836), which can also mean that people who score more in GRE also score more in TOEFL. 
+ Also, with R = 0.83 between CGPA and GRE score shows that students with good CGPA scores perform well in GRE. 
+  ![1](image1.jpg)
+
+ Step 2:
+ 
+ 1) Regressing CGPA with Chance of admit
+  Scatterplot looks homoscedastic.
+  ![2](image2.jpg)
+  ![3](image3.jpg)
+  
+  
+  
+  The Rsq value shows that the regression line is a good fit (i.e. 76% of the variability in the chance of admit is explained by our model with the help of CGPA alone). The RMSE is 0.0695 shows how spread out the residuals are.
+
 ## SAS code
 
  Correlation matrix code:
@@ -79,3 +105,5 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 	quit; 
 	proc delete data=Work.reg_design; 
 	run; 
+
+[Click for results](https://github.com/Ak1714/SAS_models/tree/master/Decision_Support/MLR-results.pdf)
