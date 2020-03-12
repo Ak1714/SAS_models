@@ -30,14 +30,19 @@ https://www.kaggle.com/mohansacharya/graduate-admissions
  As per the correlation matrix below it is clear that there is high correlation between GRE score, TOEFL score and CGPA with Chance of admit. 
  It also shows that GRE score and TOEFL score have a high correlation (R=0.836), which can also mean that people who score more in GRE also score more in TOEFL. 
  Also, with R = 0.83 between CGPA and GRE score shows that students with good CGPA scores perform well in GRE. 
-  ![1](image1.jpg)
+ 
+
+  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image1.jpg?raw=true" width="700">
 
  Step 2:
  
  1) Regressing CGPA with Chance of admit
   Scatterplot looks homoscedastic.
-  ![2](image2.jpg)
-  ![3](image3.jpg)
+  
+  
+  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image2.jpg?raw=true" width="500">
+  
+  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image3.jpg?raw=true" width="500">
   
   
   
