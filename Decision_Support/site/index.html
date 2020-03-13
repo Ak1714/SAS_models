@@ -52,13 +52,29 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#welcome-to-mkdocs" class="nav-link">Welcome to MkDocs</a>
+            <li class="nav-item" data-level="1"><a href="#decision-suppport-model" class="nav-link">Decision Suppport Model</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#commands-bubuji-try-editing-this" class="nav-link">Commands Bubuji try editing this</a>
+            <li class="nav-item" data-level="2"><a href="#commands-try-editing-this" class="nav-link">Commands -try editing this</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             <li class="nav-item" data-level="2"><a href="#project-layout" class="nav-link">Project layout</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#data-source" class="nav-link">Data source</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#summary" class="nav-link">Summary</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#data-analysis" class="nav-link">Data Analysis</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#sas-code" class="nav-link">SAS code</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -69,9 +85,8 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands-bubuji-try-editing-this">Commands Bubuji try editing this</h2>
+<h1 id="decision-suppport-model">Decision Suppport Model</h1>
+<h2 id="commands-try-editing-this">Commands -try editing this</h2>
 <ul>
 <li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
 <li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
@@ -82,8 +97,82 @@
 <pre><code>mkdocs.yml    # The configuration file.
 docs/
     index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre></div>
+</code></pre>
+<h2 id="data-source">Data source</h2>
+<p>https://www.kaggle.com/mohansacharya/graduate-admissions</p>
+<h2 id="summary">Summary</h2>
+<p>This project analyzes the graduate admission process in American universities from international students’ perspectives. The goal was to build a decision support model that provides undergraduate international applicants with important information as well as the ability to make an informed decision during the application, with high confidence of being accepted. The analysis considers factors such as standardized test scores and GPA as well as university reputation.</p>
+<h2 id="data-analysis">Data Analysis</h2>
+<p>Step 1:</p>
+<p>We start by first studying the relationships between each parameter using a pairwise correlation matrix
+ As per the correlation matrix below it is clear that there is high correlation between GRE score, TOEFL score and CGPA with Chance of admit. 
+ It also shows that GRE score and TOEFL score have a high correlation (R=0.836), which can also mean that people who score more in GRE also score more in TOEFL. 
+ Also, with R = 0.83 between CGPA and GRE score shows that students with good CGPA scores perform well in GRE. </p>
+<p><img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image1.jpg?raw=true" width="700"></p>
+<p>Step 2:</p>
+<p>1) Regressing CGPA with Chance of admit
+  Scatterplot looks homoscedastic.</p>
+<p><img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image2.jpg?raw=true" width="500"></p>
+<p><img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image3.jpg?raw=true" width="500"></p>
+<p>The Rsq value shows that the regression line is a good fit (i.e. 76% of the variability in the chance of admit is explained by our model with the help of CGPA alone). The RMSE is 0.0695 shows how spread out the residuals are.</p>
+<h2 id="sas-code">SAS code</h2>
+<p>Correlation matrix code:</p>
+<pre><code>ods noproctitle; 
+ods graphics / imagemap=on;
+
+proc corr data=_TEMP0.GRAD pearson nosimple noprob plots=none; 
+    var 'GRE Score'n 'TOEFL Score'n 'University Rating'n SOP LOR CGPA Research  
+        'Chance of Admit'n; 
+run;
+</code></pre>
+<p><a href="https://github.com/Ak1714/SAS_models/tree/master/Decision_Support/Correlation_matrix-results.pdf">Click for results</a></p>
+<p>Linear regression using each of 3 regressors with Chance of admit:</p>
+<pre><code>ods noproctitle; 
+ods graphics / imagemap=on;
+
+proc glmselect data=_TEMP0.GRAD outdesign(addinputvars)=Work.reg_design; 
+    model 'Chance of Admit'n=CGPA / showpvalues selection=none; 
+run; 
+proc glmselect data=_TEMP0.GRAD outdesign(addinputvars)=Work.reg_design; 
+    model 'Chance of Admit'n='GRE Score'n / showpvalues selection=none; 
+run; 
+proc glmselect data=_TEMP0.GRAD outdesign(addinputvars)=Work.reg_design; 
+    model 'Chance of Admit'n='TOEFL Score'n / showpvalues selection=none; 
+run; 
+proc reg data=Work.reg_design alpha=0.05 plots(only)=(diagnostics residuals  
+        observedbypredicted); 
+    where 'GRE Score'n is not missing and 'TOEFL Score'n is not missing and CGPA  
+        is not missing; 
+    ods select DiagnosticsPanel ResidualPlot ObservedByPredicted; 
+    model 'Chance of Admit'n=CGPA /; 
+    model 'Chance of Admit'n='GRE Score'n /; 
+    model 'Chance of Admit'n='TOEFL Score'n /; 
+    run; 
+quit; 
+proc delete data=Work.reg_design; 
+run;
+</code></pre>
+<p><a href="https://github.com/Ak1714/SAS_models/tree/master/Decision_Support/LR-results.pdf">Click for results</a></p>
+<p>Multiple linear regression code:</p>
+<pre><code>ods noproctitle; 
+ods graphics / imagemap=on;
+
+proc glmselect data=_TEMP0.GRAD outdesign(addinputvars)=Work.reg_design; 
+    model 'Chance of Admit'n='GRE Score'n 'TOEFL Score'n CGPA / showpvalues  
+        selection=none; 
+run; 
+proc reg data=Work.reg_design alpha=0.05 plots(only)=(diagnostics residuals  
+        observedbypredicted); 
+    where 'GRE Score'n is not missing and 'TOEFL Score'n is not missing and CGPA  
+        is not missing; 
+    ods select DiagnosticsPanel ResidualPlot ObservedByPredicted; 
+    model 'Chance of Admit'n=&amp;_GLSMOD /; 
+    run; 
+quit; 
+proc delete data=Work.reg_design; 
+run;
+</code></pre>
+<p><a href="https://github.com/Ak1714/SAS_models/tree/master/Decision_Support/MLR-results.pdf">Click for results</a></p></div>
             </div>
         </div>
 
@@ -167,5 +256,5 @@ docs/
 
 <!--
 MkDocs version : 1.1
-Build Date UTC : 2020-03-12 03:21:20
+Build Date UTC : 2020-03-13 03:15:07
 -->
