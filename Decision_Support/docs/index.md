@@ -89,17 +89,22 @@ https://www.kaggle.com/mohansacharya/graduate-admissions
   <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image12.jpg?raw=true" width="500">
   
    Seems like our model helps predict GRE scores with CGPA alone. We don't have to worry about multicollinearity as our Rsquare has not very different from our previous model with 3 regressors (As a rule of thumb, if Rsquare is more than 88% that’s when multicollinearity would come into picture).
+   
    Now, lets take a look at other models with similar Rsquare values,
 
-  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image13.jpg?raw=true" width="500">
+  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image113.jpg?raw=true" width="500">
   
    All of them have CGPA and GRE score in common. As stated earlier (through the correlation matrix) CGPA significantly influences chance of admit, its evident that the rest of the models increase the acceptance rate by a small proportion. 
   
    Let’s verify another model that has only CGPA in common,
-   Regressor 1		Regressor 2		Regressor 3		R^sq	Adj. R^sq	Root MSE
-   LOR				CGPA			Research		0.7869	0.7853		0.066079
+   
+   | Regressor 1 |	Regressor 2	 |	Regressor 3	|	R^sq   |  Adj. R^sq	| Root MSE |
+   |-------------|---------------|--------------|----------|------------|----------|
+   | LOR     	 |	CGPA    	 |	Research	|	0.7869 | 0.7853		| 0.066079 |
+   
+
   
-	After regressing LOR and Research with Chance of admit, we see that even though variation in LOR and Research explain only 50% of the variability in the model, we still see high Rsquare value.
+   After regressing LOR and Research with Chance of admit, we see that even though variation in LOR and Research explain only 50% of the variability in the model, we still see high Rsquare value.
 					
   <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image14.jpg?raw=true" width="500">
   
@@ -107,16 +112,17 @@ https://www.kaggle.com/mohansacharya/graduate-admissions
   
    After adding CGPA, Rsquare jumps by almost 44%. Which is the case with all other models. Since, GRE and TOEFL scores have a higher correlation to chance of admit than the rest of our parameters, we can select the below model,
   
-   Regressor 1		Regressor 2		Regressor 3		R^sq	Adj. R^sq	Root MSE
-   GRE Score		TOEFL Score		CGPA			0.7854	0.7837		0.066321
+   | Regressor 1 |	Regressor 2	 |	Regressor 3	|	R^sq   |  Adj. R^sq	| Root MSE |
+   |-------------|---------------|--------------|----------|------------|----------|
+   | GRE Score	 |	TOEFL Score	 |	CGPA		|	0.7854 | 0.7837		| 0.066321 |
   
-	Residual plots:
+   Residual plots:
   
   <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image15.jpg?raw=true" width="500">
 
-  The residual plots don’t seem to have constant variance. However, our primary goal in this project is to total amount of the dependent variable rather than estimating specific effects of the independent variables, we chose to not correct heteroskedasticity.
+   The residual plots don’t seem to have constant variance. However, our primary goal in this project is to total amount of the dependent variable rather than estimating specific effects of the independent variables, we chose to not correct heteroskedasticity.
   
-#Chance of admit = -1.59 + 0.002 * GRE + 0.003 * TOEFL + 0.146 * CGPA
+   Chance of admit = -1.59 + 0.002 * GRE + 0.003 * TOEFL + 0.146 * CGPA
   
 * Slope coefficient of GRE score: (can be interpreted as) a 1-point increase in GRE score corresponds to a 0.002 increase in Chance of admit
 * Slope coefficient of TOEFL score: a 1-point increase in TOEFL score corresponds to a 0.003 increase in Chance of admit
