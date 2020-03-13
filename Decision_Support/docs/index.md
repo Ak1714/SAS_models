@@ -38,7 +38,10 @@ https://www.kaggle.com/mohansacharya/graduate-admissions
   Scatterplot looks homoscedastic.
   
   R-Square: 0.7626 | R-Square: 0.7626
+  
+  
   <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image2.jpg?raw=true" width="500">
+  
   
   <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image3.jpg?raw=true" width="500">
   
@@ -52,7 +55,7 @@ https://www.kaggle.com/mohansacharya/graduate-admissions
   Variance of residuals looks constant except for a few outliers. We can safely assume it is homoscedastic.
   R-Square: 0.6442 | R-Square: 0.6433
   
-  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image5.jpg?raw=true" width="100">
+  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image5.jpg?raw=true" width="250">
   
   Slope coefficient implies that for every 1-point increase in GRE score, there is approx. 0.01 increase in Chance of admit. (Very low)
   
@@ -63,7 +66,8 @@ https://www.kaggle.com/mohansacharya/graduate-admissions
   <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image6.jpg?raw=true" width="500">
   
   
-  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image7.jpg?raw=true" width="100">
+  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image7.jpg?raw=true" width="250">
+  
   
   Slope coefficient implies that with every 1-point increase in TOEFL score, there is approx. 0.02 increase in Chance of admit.
   
@@ -74,7 +78,7 @@ https://www.kaggle.com/mohansacharya/graduate-admissions
 
   <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image9.jpg?raw=true" width="500">
   
-  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image10.jpg?raw=true" width="100">
+  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image10.jpg?raw=true" width="250">
   
   R-Square: 0.7854 | R-Square: 0.7837
   
@@ -82,7 +86,7 @@ https://www.kaggle.com/mohansacharya/graduate-admissions
   
   R-Square: 0.6940 | R-Square: 0.6932
   
-  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image11.jpg?raw=true" width="100">
+  <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image11.jpg?raw=true" width="250">
   
   <img src="https://github.com/Ak1714/SAS_models/blob/master/Decision_Support/image12.jpg?raw=true" width="500">
   
